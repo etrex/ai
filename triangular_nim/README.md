@@ -65,3 +65,26 @@ Agent 必須傳回其中一個 action 作為這次的行動。
 state 以及 action 都是以 int 的形式傳遞，若需要顯示 positions 或是 binarys ，可以使用上述的方法來做轉換。
 
 在遊戲結束時，Agent 可以從 receive_reward 獲得來自環境的回饋，若是 1 代表贏， -1 代表輸。
+
+# 遊戲的進行
+
+在 bash 輸入 `ruby main.rb` 即可進行遊戲。
+
+在 `main.rb` 中定義了 3 個方法，並且在最後呼叫這些方法：
+
+```
+def play_n_times(n = 1000)
+```
+這個方法可以使兩個 AI 進行 PK n 場遊戲，並且統計其勝負結果。
+
+```
+human_play
+```
+
+真人玩家可以跟 AI 決鬥
+
+```
+env_demo
+```
+
+用來示範 Environment 的資料轉換方法

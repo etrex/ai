@@ -5,8 +5,10 @@ require './agent_random.rb'
 
 def play_n_times(n = 1000)
   tc = Environment.new
-  tc.add_player(AgentRandom.new)
-  tc.add_player(AgentRandom.new)
+  player1 = AgentRandom.new('傻逼1')
+  player2 = AgentRandom.new('傻逼2')
+  tc.add_player(player1)
+  tc.add_player(player2)
 
   # 玩 1000 場
   tc.skip_message = true
@@ -14,8 +16,9 @@ def play_n_times(n = 1000)
   (1..n).each do |i|
     tc.start
   end
-  p tc.win_count
-  p (Time.now - t1)
+  puts "#{player1.name} 贏了 #{tc.win_count[0]} 場"
+  puts "#{player2.name} 贏了 #{tc.win_count[1]} 場"
+  puts "耗時：#{Time.now - t1} 秒"
 end
 
 def human_play
@@ -34,6 +37,6 @@ def env_demo
   # 123
 end
 
-# play_n_times(1000)
+play_n_times(1000)
 # human_play
-env_demo
+# env_demo
