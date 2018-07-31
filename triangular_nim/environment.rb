@@ -40,6 +40,14 @@ class Environment
 
   TOTAL_ACTIONS = total_actions
 
+  def self.available_actions(state)
+    TOTAL_ACTIONS.select{|action| action & state == 0 }
+  end
+
+  def self.next_state(state, action)
+    state | action
+  end
+
   attr_accessor :players
   attr_accessor :current_player_number
   attr_accessor :state
@@ -59,7 +67,7 @@ class Environment
   end
 
   def available_actions
-    TOTAL_ACTIONS.select{|action| action & state == 0 }
+    self.class.available_actions(state)
   end
 
   def action_is_valid?(action)
@@ -114,7 +122,7 @@ class Environment
         puts Environment::state_to_positions(player_selected_action) unless skip_message
         # update game state
         if action_is_valid?(player_selected_action)
-          @state = state | player_selected_action
+          @state = self.class.next_state(state, player_selected_action)
           break
         end
         puts "這是不合法的行為，請重新選擇。" unless skip_message
